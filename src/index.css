@@ -1,0 +1,554 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&family=Noto+Serif+Arabic:wght@400;500;600;700&display=swap");
+
+@theme {
+  --color-ink: #1b1c1e;
+  --color-ink-soft: #6b6d72;
+  --color-paper: #faf8f5;
+  --color-paper-raised: #ffffff;
+  --color-line: #e7e3dc;
+  --color-amber: #e8833f;
+  --color-amber-soft: #f6d9bf;
+  --color-blue: #4f7cff;
+  --color-blue-soft: #dbe5fd;
+  --color-sage: #7c9885;
+  --color-sage-soft: #dce6df;
+  --color-rose: #d97a86;
+  --color-rose-soft: #f3dadf;
+  --font-serif: "Fraunces", "Noto Serif", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-dari: "Vazirmatn", "Noto Sans Arabic", sans-serif;
+  --font-dari-serif: "Noto Serif Arabic", "Vazirmatn", serif;
+}
+
+:root {
+  --accent-blue: var(--color-blue);
+  color-scheme: light;
+}
+
+.dark {
+  --color-ink: #ececef;
+  --color-ink-soft: #9a9ca3;
+  --color-paper: #17181b;
+  --color-paper-raised: #212226;
+  --color-line: #33343a;
+  color-scheme: dark;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.myna-animated-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.home-greeting-logo svg path[fill="#1b1c1e"] {
+  fill: #3a3c40;
+}
+
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+[dir="rtl"] body,
+[dir="rtl"] {
+  font-family: var(--font-dari);
+}
+
+/* Mirrors the English Fraunces-serif/Inter-sans pairing: Dari headings get a
+   literary serif companion instead of inheriting the body's UI sans-serif. */
+[dir="rtl"] .font-serif {
+  font-family: var(--font-dari-serif);
+}
+
+::selection {
+  background: var(--color-amber-soft);
+}
+
+.scrollbar-thin {
+  scrollbar-width: none;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+.drag {
+  -webkit-app-region: drag;
+}
+
+.note-doc-fold {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 18px 0;
+  border-color: transparent var(--color-line) transparent transparent;
+}
+
+/* Tiptap editor */
+.ProseMirror {
+  outline: none;
+  min-height: 100%;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--color-ink-soft);
+  opacity: 0.6;
+  pointer-events: none;
+}
+[dir="rtl"] .ProseMirror p.is-editor-empty:first-child::before {
+  float: right;
+}
+.ProseMirror h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0.6em 0 0.3em;
+}
+.ProseMirror h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0.6em 0 0.3em;
+}
+.ProseMirror h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.6em 0 0.3em;
+}
+.ProseMirror p {
+  margin: 0.45em 0;
+  line-height: 1.75;
+}
+.myna-editor-canvas .ProseMirror {
+  font-size: 17px;
+  line-height: 1.85;
+  max-width: 880px;
+}
+.ProseMirror img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 0.6em 0;
+}
+.ProseMirror .column-resize-handle {
+  background-color: var(--color-blue);
+  width: 3px;
+}
+.ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+.ProseMirror mark {
+  border-radius: 3px;
+  padding: 0.05em 0.15em;
+}
+.ProseMirror blockquote {
+  border-left: 3px solid var(--color-amber);
+  padding-left: 1em;
+  margin: 0.8em 0;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+[dir="rtl"] .ProseMirror blockquote {
+  border-left: none;
+  border-right: 3px solid var(--color-amber);
+  padding-left: 0;
+  padding-right: 1em;
+}
+.ProseMirror pre {
+  background: #1b1c1e;
+  color: #f3f1ec;
+  padding: 0.8em 1em;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85em;
+  overflow-x: auto;
+}
+.ProseMirror code {
+  background: var(--color-line);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+.ProseMirror pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
+}
+.ProseMirror table {
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  width: 100%;
+}
+.ProseMirror td,
+.ProseMirror th {
+  border: 1px solid var(--color-line);
+  padding: 0.4em 0.6em;
+  vertical-align: top;
+}
+
+/* Template document canvas — scoped to the Templates section's own editor only */
+.template-doc-canvas .ProseMirror {
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.template-doc-canvas .ProseMirror h1 {
+  font-family: var(--font-sans);
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0.2em 0 0.5em;
+}
+.template-doc-canvas .ProseMirror h2 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.3em 0;
+}
+.template-doc-canvas .ProseMirror h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0.3em 0;
+}
+.template-doc-canvas .ProseMirror hr {
+  border: none;
+  border-top: 1px solid var(--color-line);
+  margin: 1em 0;
+}
+.template-doc-canvas .ProseMirror table {
+  margin: 0.3em 0;
+}
+.template-doc-canvas .ProseMirror td,
+.template-doc-canvas .ProseMirror th {
+  border: none;
+  padding: 0.25em 0.4em;
+}
+.template-doc-canvas .ProseMirror th {
+  background: transparent;
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-line);
+}
+.ProseMirror th {
+  background: var(--color-amber-soft);
+  font-weight: 600;
+}
+
+/* Manuscript Blueprint book-page canvas — A4-styled page with margins, scoped to blueprint chapters only */
+.book-page-canvas {
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  padding: 25mm 20mm;
+  box-sizing: border-box;
+}
+.book-page-canvas .ProseMirror {
+  font-size: 12pt;
+  line-height: 1.7;
+}
+.book-page-canvas.style-poetry .ProseMirror {
+  font-style: italic;
+}
+.book-page-canvas.style-academic .ProseMirror,
+.book-page-canvas.style-nonfiction .ProseMirror {
+  font-family: var(--font-sans);
+}
+.book-page-canvas .ProseMirror h1 {
+  font-size: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.4em;
+}
+.book-dropcap .ProseMirror > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 700;
+  padding-right: 0.1em;
+  padding-top: 0.02em;
+}
+[dir="rtl"] .book-dropcap .ProseMirror > p:first-of-type::first-letter {
+  float: right;
+  padding-left: 0.1em;
+  padding-right: 0;
+}
+.book-page-break {
+  margin: 0 -20mm;
+  padding: 0 20mm;
+  background: var(--color-paper);
+  box-shadow:
+    inset 0 8px 8px -8px rgba(0, 0, 0, 0.15),
+    inset 0 -8px 8px -8px rgba(0, 0, 0, 0.15);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.book-page-break-footer {
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--color-ink-soft);
+  padding: 10px 0;
+}
+.book-page-break-gap {
+  height: 28px;
+}
+.book-page-final-footer-wrap {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.book-page-final-footer {
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--color-ink-soft);
+  padding-top: 10px;
+}
+.ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+.ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+.ProseMirror .callout {
+  background: #f1f6f3;
+  border-left: 3px solid var(--color-sage);
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  margin: 0.8em 0;
+}
+.ProseMirror .vocabulary-block {
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 0.7em 1em;
+  margin: 0.8em 0;
+  background: var(--color-paper-raised);
+}
+.ProseMirror .vocabulary-block::before {
+  content: "Vocabulary";
+  display: block;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-amber);
+  margin-bottom: 0.3em;
+}
+.ProseMirror .vocabulary-block p:first-of-type {
+  font-weight: 600;
+  margin: 0;
+}
+.ProseMirror .vocabulary-block p:last-of-type {
+  color: var(--color-ink-soft);
+  margin: 0.2em 0 0;
+}
+.ProseMirror .toggle-block {
+  display: flex;
+  gap: 0.4em;
+  margin: 0.6em 0;
+}
+.ProseMirror .toggle-button {
+  background: var(--color-line);
+  border: none;
+  border-radius: 5px;
+  width: 1.4em;
+  height: 1.4em;
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  font-size: 0.8em;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+}
+.ProseMirror .toggle-block .toggle-content {
+  flex: 1;
+  min-width: 0;
+}
+.ProseMirror .toggle-block[data-open="false"] .toggle-content {
+  display: none;
+}
+.ProseMirror .math-block {
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 1em;
+  margin: 0.8em 0;
+  background: var(--color-paper-raised);
+  overflow-x: auto;
+  cursor: pointer;
+  text-align: center;
+}
+.ProseMirror .footnote-ref {
+  cursor: pointer;
+  color: var(--color-amber);
+  font-weight: 600;
+  margin: 0 0.1em;
+}
+.ProseMirror .citation-ref {
+  cursor: default;
+  color: var(--color-blue);
+  font-size: 0.9em;
+}
+.ProseMirror .myna-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  margin: 0.8em 0;
+}
+.ProseMirror .myna-column {
+  min-width: 0;
+  border-left: 1px dashed var(--color-line);
+  padding-left: 1.2em;
+}
+.ProseMirror .myna-column:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+.ProseMirror .note-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--color-blue) 12%, transparent);
+  color: var(--color-blue);
+  border-radius: 6px;
+  padding: 0.05em 0.5em;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.ProseMirror .attachment-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 0.6em 0.9em;
+  margin: 0.8em 0;
+  background: var(--color-paper-raised);
+  max-width: 420px;
+}
+.ProseMirror .attachment-icon {
+  font-size: 1.3em;
+}
+.ProseMirror .attachment-info {
+  flex: 1;
+  min-width: 0;
+}
+.ProseMirror .attachment-name {
+  font-size: 0.92em;
+  font-weight: 500;
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ProseMirror .attachment-size {
+  font-size: 0.8em;
+  color: var(--color-ink-soft);
+}
+.ProseMirror .attachment-download {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--color-blue);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.ProseMirror .audio-block {
+  margin: 0.8em 0;
+}
+.ProseMirror .audio-block-player {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.ProseMirror .audio-block-remove {
+  color: var(--color-ink-soft);
+  flex-shrink: 0;
+}
+.ProseMirror .audio-block-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 0.5em 1em;
+  font-size: 0.85em;
+  font-weight: 500;
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.ProseMirror .audio-block-recording {
+  background: var(--color-rose);
+  color: #fff;
+  border-color: var(--color-rose);
+}
+.ProseMirror .sketch-block {
+  position: relative;
+  display: inline-block;
+  margin: 0.8em 0;
+}
+.ProseMirror .sketch-canvas {
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: #fff;
+  touch-action: none;
+  cursor: crosshair;
+  display: block;
+  max-width: 100%;
+}
+.ProseMirror .sketch-clear {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--color-paper-raised);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  padding: 0.3em;
+  color: var(--color-ink-soft);
+}
+.myna-review-mode .ProseMirror > p,
+.myna-review-mode .ProseMirror > ul,
+.myna-review-mode .ProseMirror > ol,
+.myna-review-mode .ProseMirror > blockquote,
+.myna-review-mode .ProseMirror > pre {
+  display: none;
+}
+.myna-review-mode .ProseMirror .callout,
+.myna-review-mode .ProseMirror .vocabulary-block {
+  display: block;
+}
